@@ -25,7 +25,7 @@ export default function CookiePolicyPage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p>
-            This Cookie Policy explains how StaffEcho (&quot;we&quot;,
+            This Cookie Policy explains how launch-kit (&quot;we&quot;,
             &quot;us&quot;, or &quot;our&quot;) uses cookies and similar
             technologies to recognize you when you visit our website and
             application. It explains what these technologies are and why we use
@@ -42,7 +42,7 @@ export default function CookiePolicyPage() {
             efficiently, as well as to provide reporting information.
           </p>
           <p>
-            Cookies set by the website owner (in this case, StaffEcho) are
+            Cookies set by the website owner (in this case, launch-kit) are
             called &quot;first-party cookies&quot;. Cookies set by parties other
             than the website owner are called &quot;third-party cookies&quot;.
             Third-party cookies enable third-party features or functionality to
@@ -275,7 +275,7 @@ export default function CookiePolicyPage() {
             If you have any questions about our use of cookies or other
             technologies, please contact us at:
           </p>
-          <p>Email: osacryiu.lap@gmail.com</p>
+          <p>Email: osacryiu.lapsang@gmail.com</p>
         </section>
       </div>
     </div>

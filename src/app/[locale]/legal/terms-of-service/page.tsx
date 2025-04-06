@@ -25,7 +25,7 @@ export default function TermsOfServicePage() {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">1. Introduction</h2>
           <p>
-            Welcome to StaffEcho. These Terms of Service govern your use of our
+            Welcome to launch-kit. These Terms of Service govern your use of our
             web application and services. By accessing or using our application,
             you agree to be bound by these Terms. If you disagree with any part
             of the terms, you may not access the application.
@@ -36,7 +36,7 @@ export default function TermsOfServicePage() {
           <h2 className="text-2xl font-semibold mb-4">2. Definitions</h2>
           <ul className="list-disc pl-6 mb-4">
             <li>
-              <strong>Application</strong>: StaffEcho staff roster management
+              <strong>Application</strong>: launch-kit staff roster management
               system accessible via website
             </li>
             <li>
@@ -120,7 +120,7 @@ export default function TermsOfServicePage() {
           </h2>
           <p>
             The Application and its original content, features, and
-            functionality are owned by StaffEcho and are protected by
+            functionality are owned by launch-kit and are protected by
             international copyright, trademark, patent, trade secret, and other
             intellectual property or proprietary rights laws.
           </p>
@@ -184,11 +184,11 @@ export default function TermsOfServicePage() {
             8. Limitation of Liability
           </h2>
           <p>
-            In no event shall StaffEcho, nor its directors, employees, partners,
-            agents, suppliers, or affiliates, be liable for any indirect,
-            incidental, special, consequential or punitive damages, including
-            without limitation, loss of profits, data, use, goodwill, or other
-            intangible losses, resulting from:
+            In no event shall launch-kit, nor its directors, employees,
+            partners, agents, suppliers, or affiliates, be liable for any
+            indirect, incidental, special, consequential or punitive damages,
+            including without limitation, loss of profits, data, use, goodwill,
+            or other intangible losses, resulting from:
           </p>
           <ul className="list-disc pl-6 mb-4">
             <li>
@@ -217,7 +217,7 @@ export default function TermsOfServicePage() {
             non-infringement, or course of performance.
           </p>
           <p>
-            StaffEcho does not warrant that the Application will function
+            launch-kit does not warrant that the Application will function
             uninterrupted, secure or available at any particular time or
             location, or that any errors or defects will be corrected.
           </p>
@@ -260,7 +260,7 @@ export default function TermsOfServicePage() {
           <p>
             If you have any questions about these Terms, please contact us at:
           </p>
-          <p>Email: osacryiu.lap@gmail.com</p>
+          <p>Email: osacryiu.lapsang@gmail.com</p>
         </section>
       </div>
     </div>

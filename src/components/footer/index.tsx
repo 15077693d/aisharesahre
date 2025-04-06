@@ -35,7 +35,7 @@ export function Footer() {
               {t("cookiePolicy")}
             </Link>
             <Link
-              href="mailto:osacryiu.lap@gmail.com"
+              href="mailto:osacryiu.lapsang@gmail.com"
               className="hover:underline"
             >
               {t("contactUs")}
