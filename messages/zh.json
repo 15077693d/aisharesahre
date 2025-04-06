@@ -64,7 +64,10 @@
     "createdBy": "由 {userName} 創建",
     "copyToClipboard": "複製到剪貼板",
     "copied": "已複製！",
-    "sharePrompt": "分享提示詞"
+    "sharePrompt": "分享提示詞",
+    "share": "分享",
+    "sharedSuccessfully": "分享成功",
+    "linkCopied": "鏈接已複製到剪貼板"
   },
   "error": {
     "title": "出錯了！",

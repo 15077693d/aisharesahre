@@ -40,22 +40,13 @@ export function SharePromptDialog({
   const t = useTranslations();
   const router = useRouter();
   const { status } = useSession();
-  const isAuthenticated = status === "authenticated";
 
   // Define schema for prompt validation
   const promptSchema = z.object({
-    title: z
-      .string()
-      .min(1, t("prompt.title") + " " + t("auth.invalidCredentials")),
-    aiTool: z
-      .string()
-      .min(1, t("prompt.aiTool") + " " + t("auth.invalidCredentials")),
-    description: z
-      .string()
-      .min(1, t("prompt.description") + " " + t("auth.invalidCredentials")),
-    content: z
-      .string()
-      .min(1, t("prompt.content") + " " + t("auth.invalidCredentials")),
+    title: z.string().min(1, t("prompt.title")),
+    aiTool: z.string().min(1, t("prompt.aiTool")),
+    description: z.string().min(1, t("prompt.description")),
+    content: z.string().min(1, t("prompt.content")),
   });
 
   type PromptFormValues = z.infer<typeof promptSchema>;

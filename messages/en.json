@@ -64,7 +64,10 @@
     "createdBy": "Created by {userName}",
     "copyToClipboard": "Copy to Clipboard",
     "copied": "Copied!",
-    "sharePrompt": "Share Prompt"
+    "sharePrompt": "Share Prompt",
+    "share": "Share",
+    "sharedSuccessfully": "Shared successfully",
+    "linkCopied": "Link copied to clipboard"
   },
   "error": {
     "title": "Something went wrong!",

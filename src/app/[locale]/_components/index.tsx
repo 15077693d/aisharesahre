@@ -1,24 +1,11 @@
 "use client";
 
+import { PromptCard } from "@/components/card/prompt-card";
+import type { PromptProps } from "@/lib/types";
 import { useTranslations } from "next-intl";
-import { PromptCard } from "../card/prompt-card";
 
 interface PromptGridProps {
-  prompts: {
-    id: string;
-    title: string;
-    aiTool: string;
-    description: string;
-    content: string;
-    likes?: number;
-    userId: string;
-    createdAt: Date | null;
-    updatedAt: Date | null;
-    user?: {
-      name?: string | null;
-      image?: string | null;
-    };
-  }[];
+  prompts: PromptProps[];
   emptyMessage?: string;
 }
 
@@ -34,7 +21,7 @@ export function PromptGrid({ prompts, emptyMessage }: PromptGridProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 py-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 py-8">
       {prompts.map((prompt) => (
         <PromptCard key={prompt.id} prompt={prompt} />
       ))}
