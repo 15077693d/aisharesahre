@@ -29,6 +29,7 @@ export const useDialogStore = create<DialogStore>()(
     (set) => ({
       dialogs: {
         [DialogId.LOGIN]: { isOpen: false, disableClose: false },
+        [DialogId.SHARE_PROMPT]: { isOpen: false, disableClose: false },
       },
 
       openDialog: (dialogId) =>
