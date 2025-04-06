@@ -24,7 +24,7 @@ export function Footer() {
               {t("copyright", { year: currentYear })}
             </p>
           </div>
-          <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+          <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
             <Link href={privacyLink} className="hover:underline">
               {t("privacyPolicy")}
             </Link>

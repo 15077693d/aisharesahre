@@ -1,9 +1,7 @@
 "use client";
 import {
-  Coffee,
   Copy,
   ExternalLink,
-  Plus,
   Search,
   Share2,
   PenTool as Tool,
@@ -97,39 +95,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
       {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <Share2 className="h-6 w-6 text-purple-600" />
-              <h1 className="text-2xl font-bold text-gray-900">AIShareShare</h1>
-            </div>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex items-center space-x-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
-            >
-              <Plus className="h-5 w-5" />
-              <span>Share Prompt</span>
-            </button>
-          </div>
-        </div>
-        {/* Buy Me a Coffee Banner */}
-        <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 py-2">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <a
-              href="https://www.buymeacoffee.com/aishareshare"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center space-x-2 text-gray-800 hover:text-gray-900 transition-colors"
-            >
-              <Coffee className="h-5 w-5" />
-              <span className="font-medium">
-                Support AIShareShare - Buy me a coffee! ☕️
-              </span>
-            </a>
-          </div>
-        </div>
-      </header>
 
       {/* Copy Success Toast */}
       {showCopySuccess && (

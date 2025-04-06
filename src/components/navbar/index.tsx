@@ -1,60 +1,82 @@
 "use client";
-import { AvatarDropdown } from "@/components/dropdown/avatar-dropdown";
-import { LanguageDropdown } from "@/components/dropdown/language-dropdown";
-import { ThemeToggle } from "@/components/navbar/theme-toggle";
-import { Link, usePathname } from "@/i18n/navigation";
-import { HIDDEN_BANNER_PREFIX, HIDDEN_NAV_PREFIX } from "@/lib/constants";
+import { Link } from "@/i18n/navigation";
+import { DialogId, useDialogStore } from "@/lib/stores/useDialogStore";
+import { Github, Plus, Share2 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { SharePromptDialog } from "../dialog/share-prompt-dialog";
+import { AvatarDropdown } from "../dropdown/avatar-dropdown";
+import { LanguageDropdown } from "../dropdown/language-dropdown";
+import { Button } from "../ui/button";
 
 export function Navbar() {
-  const pathname = usePathname();
-  const tNav = useTranslations("navigation");
-  const tBanner = useTranslations("banner");
-  const tCommon = useTranslations("common");
-  if (HIDDEN_NAV_PREFIX.some((prefix) => pathname.includes(prefix))) {
-    return null;
-  }
+  const t = useTranslations();
+  const { openDialog, dialogs, closeDialog } = useDialogStore();
   return (
     <>
-      {/* Test version banner */}
-      {!HIDDEN_BANNER_PREFIX.some((prefix) => pathname.includes(prefix)) && (
-        <div className="bg-yellow-500 dark:bg-yellow-800 py-2 text-center text-sm text-black dark:text-white font-medium">
-          {tBanner("testVersion")}
-          <a
-            href="mailto:oscaryiu.lapsang@gmail.com"
-            className="underline ml-1"
-          >
-            {tBanner("contactEmail", { email: "oscaryiu.lapsang@gmail.com" })}
-          </a>
-        </div>
-      )}
-      <header className="bg-background narbar">
-        <div className="container flex h-16 items-center justify-between px-4 m-auto">
-          <div className="flex items-center gap-6 md:gap-10">
-            <Link
-              href="/"
-              className="font-bold text-xl flex items-center gap-1"
-            >
-              {tCommon("appName")}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="flex items-center space-x-2">
+              <Share2 className="h-6 w-6 text-purple-600" />
+              <h1 className="text-md font-bold text-gray-900 sm:text-2xl">
+                AIShareShare
+              </h1>
             </Link>
-            <nav className="hidden md:flex gap-6">
-              <Link
-                href={"/"}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  pathname === "/" ? "text-foreground" : "text-muted-foreground"
-                }`}
-              >
-                {tNav("home")}
-              </Link>
-            </nav>
+
+            <div className="flex items-center gap-4">
+              <nav className="hidden md:flex space-x-4 mr-4">
+                <Link
+                  href="/"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  {t("navigation.home")}
+                </Link>
+                <Link
+                  href="/prompts"
+                  className="text-gray-600 hover:text-gray-900 transition-colors"
+                >
+                  {t("prompt.browseAll")}
+                </Link>
+              </nav>
+              <div className="flex items-center gap-2">
+                <LanguageDropdown />
+                <AvatarDropdown />
+                <Button
+                  variant="default"
+                  onClick={() => openDialog(DialogId.SHARE_PROMPT)}
+                >
+                  <Plus className="h-5 w-5 mr-2" />
+                  <span className="hidden sm:block">
+                    {t("navigation.sharePrompt")}
+                  </span>
+                </Button>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center gap-2">
-            <ThemeToggle />
-            <LanguageDropdown />
-            <AvatarDropdown />
+        </div>
+        {/* Buy Me a Coffee Banner */}
+        <div className="bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 py-2">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a
+              href="https://github.com/15077693d/aisharesahre"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center space-x-2 text-gray-800 hover:text-gray-900 transition-colors"
+            >
+              <Github className="h-4 w-4 md:h-5 md:w-5" />
+              <span className="text-sm md:text-base font-medium">
+                {t("navigation.contributeGithub")}
+              </span>
+            </a>
           </div>
         </div>
       </header>
+
+      {/* Share Prompt Dialog */}
+      <SharePromptDialog
+        open={dialogs[DialogId.SHARE_PROMPT].isOpen}
+        onOpenChange={() => setDialogDisableClose(DialogId.SHARE_PROMPT, false)}
+      />
     </>
   );
 }

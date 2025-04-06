@@ -67,3 +67,29 @@ export const verificationTokens = createTable(
   }),
   (t) => [primaryKey({ columns: [t.identifier, t.token] })],
 );
+
+// New table for storing user prompts
+export const prompts = createTable(
+  "prompt",
+  (d) => ({
+    id: d
+      .varchar({ length: 255 })
+      .notNull()
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    title: d.varchar({ length: 255 }).notNull(),
+    aiTool: d.varchar({ length: 255 }).notNull(),
+    content: d.text().notNull(),
+    userId: d
+      .varchar({ length: 255 })
+      .notNull()
+      .references(() => users.id),
+    createdAt: d
+      .timestamp({ mode: "date", withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`),
+    updatedAt: d
+      .timestamp({ mode: "date", withTimezone: true })
+      .default(sql`CURRENT_TIMESTAMP`),
+  }),
+  (t) => [index("prompt_user_id_idx").on(t.userId)],
+);

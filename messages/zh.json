@@ -4,7 +4,7 @@
     "termsOfService": "服務條款",
     "cookiePolicy": "Cookie 政策",
     "contactUs": "聯絡我們",
-    "copyright": "© {year} aishareshare. All rights reserved."
+    "copyright": "© {year} AIShareShare. All rights reserved."
   },
   "banner": {
     "testVersion": "測試版本",
@@ -20,7 +20,9 @@
     "timetable": "時間表",
     "userAvatar": "用戶頭像",
     "signOut": "登出",
-    "signIn": "登入"
+    "signIn": "登入",
+    "sharePrompt": "分享提示詞",
+    "contributeGithub": "在 GitHub 上為 AIShareShare 做貢獻！🚀"
   },
   "home": {
     "heroDescription": "heroDescription",
@@ -34,6 +36,33 @@
     "button": "button",
     "readyToStart": "readyToStart",
     "ctaDescription": "ctaDescription"
+  },
+  "prompt": {
+    "create": "創建提示詞",
+    "edit": "編輯提示詞",
+    "view": "查看提示詞",
+    "delete": "刪除提示詞",
+    "title": "標題",
+    "aiTool": "AI 工具",
+    "content": "提示詞內容",
+    "titlePlaceholder": "為您的提示詞輸入標題",
+    "aiToolPlaceholder": "這個提示詞適用於哪個 AI 工具？（例如：ChatGPT、DALL-E、Claude）",
+    "contentPlaceholder": "在此輸入您的提示詞內容...",
+    "save": "保存提示詞",
+    "update": "更新提示詞",
+    "cancel": "取消",
+    "promptSaved": "提示詞保存成功",
+    "promptUpdated": "提示詞更新成功",
+    "promptDeleted": "提示詞刪除成功",
+    "confirmDelete": "您確定要刪除這個提示詞嗎？",
+    "myPrompts": "我的提示詞",
+    "noPrompts": "您還沒有創建任何提示詞",
+    "createYourFirst": "創建您的第一個提示詞",
+    "browseAll": "瀏覽所有提示詞",
+    "createdBy": "由 {userName} 創建",
+    "copyToClipboard": "複製到剪貼板",
+    "copied": "已複製！",
+    "sharePrompt": "分享提示詞"
   },
   "error": {
     "title": "出錯了！",

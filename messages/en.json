@@ -13,14 +13,16 @@
     "termsOfService": "Terms of Service",
     "cookiePolicy": "Cookie Policy",
     "contactUs": "Contact Us",
-    "copyright": "© {year} aishareshare. All rights reserved."
+    "copyright": "© {year} AIShareShare. All rights reserved."
   },
   "loading": "Loading",
   "navigation": {
     "home": "Home",
     "userAvatar": "User avatar",
     "signOut": "Sign out",
-    "signIn": "Sign in"
+    "signIn": "Sign in",
+    "sharePrompt": "Share Prompt",
+    "contributeGithub": "Contribute to AIShareShare on GitHub! 🚀"
   },
   "home": {
     "heroDescription": "heroDescription",
@@ -34,6 +36,33 @@
     "button": "button",
     "readyToStart": "readyToStart",
     "ctaDescription": "ctaDescription"
+  },
+  "prompt": {
+    "create": "Create Prompt",
+    "edit": "Edit Prompt",
+    "view": "View Prompt",
+    "delete": "Delete Prompt",
+    "title": "Title",
+    "aiTool": "AI Tool",
+    "content": "Prompt Content",
+    "titlePlaceholder": "Enter a title for your prompt",
+    "aiToolPlaceholder": "Which AI tool is this prompt for? (e.g., ChatGPT, DALL-E, Claude)",
+    "contentPlaceholder": "Enter your prompt content here...",
+    "save": "Save Prompt",
+    "update": "Update Prompt",
+    "cancel": "Cancel",
+    "promptSaved": "Prompt saved successfully",
+    "promptUpdated": "Prompt updated successfully",
+    "promptDeleted": "Prompt deleted successfully",
+    "confirmDelete": "Are you sure you want to delete this prompt?",
+    "myPrompts": "My Prompts",
+    "noPrompts": "You haven't created any prompts yet",
+    "createYourFirst": "Create your first prompt",
+    "browseAll": "Browse All Prompts",
+    "createdBy": "Created by {userName}",
+    "copyToClipboard": "Copy to Clipboard",
+    "copied": "Copied!",
+    "sharePrompt": "Share Prompt"
   },
   "error": {
     "title": "Something went wrong!",
