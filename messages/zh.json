@@ -61,6 +61,7 @@
     "invalidCredentials": "無效的電子郵件或密碼",
     "orContinueWith": "或者繼續使用",
     "google": "Google",
-    "discord": "Discord"
+    "discord": "Discord",
+    "github": "GitHub"
   }
 }

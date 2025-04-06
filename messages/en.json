@@ -61,6 +61,7 @@
     "invalidCredentials": "Invalid email or password",
     "orContinueWith": "or continue with",
     "google": "Google",
-    "discord": "Discord"
+    "discord": "Discord",
+    "github": "GitHub"
   }
 }
