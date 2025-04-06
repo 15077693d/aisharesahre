@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 
 export function Navbar() {
   const t = useTranslations();
-  const { openDialog, dialogs, closeDialog } = useDialogStore();
+  const { openDialog, dialogs, onOpenChange } = useDialogStore();
   return (
     <>
       <header className="bg-white shadow-sm">
@@ -75,7 +75,7 @@ export function Navbar() {
       {/* Share Prompt Dialog */}
       <SharePromptDialog
         open={dialogs[DialogId.SHARE_PROMPT].isOpen}
-        onOpenChange={() => setDialogDisableClose(DialogId.SHARE_PROMPT, false)}
+        onOpenChange={(open) => onOpenChange(DialogId.SHARE_PROMPT, open)}
       />
     </>
   );
