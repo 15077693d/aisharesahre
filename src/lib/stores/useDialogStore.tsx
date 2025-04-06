@@ -19,6 +19,7 @@ type DialogStore = {
   openDialog: (dialogId: DialogId) => void;
   closeDialog: (dialogId: DialogId) => void;
   setDialogDisableClose: (dialogId: DialogId, disableClose: boolean) => void;
+  onOpenChange: (dialogId: DialogId, isOpen: boolean) => void;
   // Other actions as needed
 };
 
@@ -64,6 +65,18 @@ export const useDialogStore = create<DialogStore>()(
           }),
           false,
           "setDialogDisableClose",
+        ),
+
+      onOpenChange: (dialogId, isOpen) =>
+        set(
+          (state) => ({
+            dialogs: {
+              ...state.dialogs,
+              [dialogId]: { ...state.dialogs[dialogId], isOpen },
+            },
+          }),
+          false,
+          "onOpenChange",
         ),
     }),
     {
