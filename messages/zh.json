@@ -58,7 +58,7 @@
     "promptDeleted": "提示詞刪除成功",
     "confirmDelete": "您確定要刪除這個提示詞嗎？",
     "myPrompts": "我的提示詞",
-    "noPrompts": "您還沒有創建任何提示詞",
+    "noPrompts": "還沒有創建任何提示詞",
     "createYourFirst": "創建您的第一個提示詞",
     "browseAll": "瀏覽所有提示詞",
     "createdBy": "由 {userName} 創建",
@@ -67,7 +67,8 @@
     "sharePrompt": "分享提示詞",
     "share": "分享",
     "sharedSuccessfully": "分享成功",
-    "linkCopied": "鏈接已複製到剪貼板"
+    "linkCopied": "鏈接已複製到剪貼板",
+    "copyLink": "複製鏈接"
   },
   "error": {
     "title": "出錯了！",

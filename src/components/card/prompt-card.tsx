@@ -1,9 +1,8 @@
 "use client";
 
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { Copy, Share2, Wand2 } from "lucide-react";
+import { Copy, Link, Wand2 } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
 import { toast } from "sonner";
 
 export interface PromptCardProps {
@@ -26,36 +25,40 @@ export interface PromptCardProps {
 
 export function PromptCard({ prompt }: PromptCardProps) {
   const t = useTranslations();
-  const [isCopying, setIsCopying] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      setIsCopying(true);
       await navigator.clipboard.writeText(prompt.content);
       toast.success(t("prompt.copied"));
     } catch (error) {
       toast.error(t("error.title"));
-    } finally {
-      setIsCopying(false);
     }
   };
 
-  const handleSharePrompt = () => {
-    if (navigator.share) {
-      void navigator
-        .share({
+  const handleSharePrompt = async () => {
+    try {
+      if (navigator.share && !isDesktop()) {
+        // Mobile devices and some modern browsers
+        await navigator.share({
           title: prompt.title,
           text: `Check out this prompt: ${prompt.title}`,
-          url: window.location.href,
-        })
-        .then(() => toast.success(t("prompt.sharedSuccessfully")))
-        .catch((error) => console.error("Error sharing:", error));
-    } else {
-      // Fallback for browsers that don't support navigator.share
-      void navigator.clipboard.writeText(window.location.href).then(() => {
+          url: `${window.location.origin}/${prompt.id}`,
+        });
+        toast.success(t("prompt.sharedSuccessfully"));
+      } else {
+        // Desktop fallback - copy link to clipboard
+        await navigator.clipboard.writeText(window.location.href);
         toast.success(t("prompt.linkCopied"));
-      });
+      }
+    } catch (error) {
+      console.error("Error sharing:", error);
+      toast.error(t("error.title"));
     }
+  };
+
+  // Simple detection of desktop environment
+  const isDesktop = () => {
+    return window.innerWidth >= 1024 && !("ontouchstart" in window);
   };
 
   return (
@@ -91,19 +94,16 @@ export function PromptCard({ prompt }: PromptCardProps) {
           <button
             onClick={copyToClipboard}
             className="flex items-center space-x-1 text-gray-600 hover:text-gray-900"
-            disabled={isCopying}
           >
             <Copy className="h-4 w-4" />
-            <span>
-              {isCopying ? t("prompt.copied") : t("prompt.copyToClipboard")}
-            </span>
+            <span>{t("prompt.copyToClipboard")}</span>
           </button>
           <button
             onClick={handleSharePrompt}
             className="flex items-center space-x-1 text-purple-600 hover:text-purple-700"
           >
-            <Share2 className="h-4 w-4" />
-            <span>{t("prompt.share")}</span>
+            <Link className="h-4 w-4" />
+            <span>{t("prompt.copyLink")}</span>
           </button>
         </div>
       </div>
