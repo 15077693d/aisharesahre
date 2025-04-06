@@ -1,0 +1,66 @@
+{
+  "footer": {
+    "privacyPolicy": "隱私政策",
+    "termsOfService": "服務條款",
+    "cookiePolicy": "Cookie 政策",
+    "contactUs": "聯絡我們",
+    "copyright": "© {year} launch-kit. All rights reserved."
+  },
+  "banner": {
+    "testVersion": "測試版本",
+    "contactEmail": "聯絡我們 at {email}"
+  },
+  "common": {
+    "signInRequired": "需要登錄才能繼續",
+    "appName": "launch-kit",
+    "loading": "處理中"
+  },
+  "navigation": {
+    "home": "首頁",
+    "timetable": "時間表",
+    "userAvatar": "用戶頭像",
+    "signOut": "登出",
+    "signIn": "登入"
+  },
+  "home": {
+    "heroDescription": "heroDescription",
+    "cardTitle1": "cardTitle1",
+    "cardDescription1": "cardDescription1",
+    "cardTitle2": "cardTitle2",
+    "cardDescription2": "cardDescription2",
+    "cardTitle3": "cardTitle3",
+    "cardDescription3": "cardDescription3",
+    "howItWorks": "howItWorks",
+    "button": "button",
+    "readyToStart": "readyToStart",
+    "ctaDescription": "ctaDescription"
+  },
+  "error": {
+    "title": "出錯了！",
+    "description": "我們為此帶來的不便深表歉意。請重試或返回首頁。",
+    "tryAgain": "重試",
+    "returnHome": "返回首頁"
+  },
+  "notFound": {
+    "title": "找不到頁面",
+    "description": "找不到請求的資源",
+    "redirecting": "{count} 秒後重定向到首頁...",
+    "returnHome": "立即返回首頁"
+  },
+  "auth": {
+    "signIn": "登錄",
+    "signUp": "註冊",
+    "email": "電子郵件",
+    "password": "密碼",
+    "emailPlaceholder": "example@example.com",
+    "passwordPlaceholder": "••••••••",
+    "enterCredentials": "輸入您的帳號密碼進行登錄",
+    "signingIn": "登錄中...",
+    "signInSuccess": "登錄成功",
+    "signInError": "登錄失敗",
+    "invalidCredentials": "無效的電子郵件或密碼",
+    "orContinueWith": "或者繼續使用",
+    "google": "Google",
+    "discord": "Discord"
+  }
+}

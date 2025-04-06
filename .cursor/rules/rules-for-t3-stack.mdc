@@ -1,0 +1,712 @@
+---
+description: check it everytime
+globs: 
+alwaysApply: false
+---
+# Programming Rules
+
+As a professional senior developer, you are expected to write clear, simple, and correct code. These rules ensure consistency and quality across the codebase. Follow them carefully for all frontend development work.
+
+1. Functions should always use explicit curly braces for return statements:
+   - Use: `function example() { return value; }`
+   - Avoid: `function example() => (value)`
+   
+   Example:
+   ```js
+   // GOOD
+   function increment() { 
+     return count + 1; 
+   }
+   
+   const handleClick = () => { 
+     return processEvent(); 
+   }
+   
+   // BAD
+   function increment() => count + 1
+   
+   const handleClick = () => processEvent()
+   ```
+
+2. Zustand stores must include Redux DevTools integration:
+   - Always include the devtools middleware when creating stores
+   - Example: `create(devtools(...))`
+   - Every state update must include an action name in the third parameter of set()
+   - Provide a name for each store to identify it in Redux DevTools
+   
+   Example:
+   ```js
+   // GOOD
+   const useStore = create<{ count: number; increment: () => void }>()(
+     devtools(
+       (set) => {
+         return {
+           count: 0,
+           increment: () => {
+             set((state) => ({ count: state.count + 1 }), false, "increment");
+           },
+           decrement: () => {
+             set((state) => ({ count: state.count - 1 }), false, "decrement");
+           },
+         };
+       },
+       { name: "CounterStore" }  // Named store for identification in DevTools
+     ),
+   );
+   
+   // BAD
+   const useStore = create<{ count: number; increment: () => void }>()((set) => {
+     return {
+       count: 0,
+       increment: () => {
+         set((state) => ({ count: state.count + 1 })); // Missing action name
+       },
+     };
+   });
+   ```
+
+3. UI components must properly use shadcn/ui:
+   - Follow shadcn/ui component guidelines and patterns
+   - Maintain consistent styling with the shadcn/ui design system
+   - Use shadcn/ui's built-in variants and customization options
+
+4. All designs must be mobile-first and responsive:
+   - Start with mobile layouts first, then scale up to larger screens
+   - Use responsive design patterns (fluid layouts, flexible grids)
+   - Test across multiple viewport sizes to ensure proper adaptation
+   - Utilize responsive utility classes or media queries as needed
+   - mobile first and make pefect ui
+
+5. Naming conventions:
+   - File names: kebab-case (e.g., `user-profile.tsx`, `auth-utils.ts`)
+   - Component names: PascalCase (e.g., `UserProfile`, `AuthButton`)
+   - Variables, functions, and methods: camelCase (e.g., `userData`, `handleSubmit`)
+   - Constants: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_COUNT`, `API_ENDPOINT`)
+   
+   Example:
+   ```js
+   // In file: user-profile.tsx
+   
+   // Component name in PascalCase
+   export function UserProfile() {
+     // Variables in camelCase
+     const userName = 'John';
+     const hasAccess = true;
+     
+     // Function in camelCase
+     function handleLogout() {
+       // Implementation
+     }
+     
+     return (
+       <div>
+         {/* Implementation */}
+       </div>
+     );
+   }
+   
+   // Constants in UPPER_SNAKE_CASE
+   export const DEFAULT_SETTINGS = {
+     theme: 'light',
+     notifications: true
+   };
+   ```
+
+6. Component organization:
+   - Components that need to be shared across the application should be placed in appropriate subdirectories
+   - Follow the pattern: `src/components/[component-type]/[component-name].tsx`
+   - Example: `src/components/dialog/login-dialog.tsx`
+   - This organization makes components easier to find, reuse, and maintain
+   - Group related components by their type (e.g., buttons, dialogs, forms)
+
+7. Using map for repeated list items:
+   - Use the `map` function to render lists of similar items
+   - Always include a unique `key` prop for each mapped item
+   - Extract complex item rendering into separate components when appropriate
+   - Apply consistent styling across mapped elements
+
+   Example:
+   ```jsx
+   // GOOD
+   const socialProviders = [
+     { id: "google", name: "auth.google", icon: <GoogleIcon /> },
+     { id: "discord", name: "auth.discord", icon: <DiscordIcon /> }
+   ];
+
+   // In your component
+   {socialProviders.map((_provider) => (
+     <Button
+       key={_provider.id}
+       variant="outline"
+       className="flex-1"
+       onClick={() => handleSocialLogin(_provider.id)}
+       type="button"
+     >
+       {_provider.icon}
+       {t(_provider.name)}
+     </Button>
+   ))}
+
+   // Also applies to array methods like forEach, filter, find, etc.
+   const slotInfo = timetable.slotInfos.find(
+     (_slotInfo) => _slotInfo.id === timeslot.id
+   );
+
+   // BAD
+   {socialProviders.map((provider) => (
+     <Button
+       key={provider.id}
+       variant="outline"
+       className="flex-1"
+       onClick={() => handleSocialLogin(provider.id)}
+       type="button"
+     >
+       {provider.icon}
+       {t(provider.name)}
+     </Button>
+   ))}
+   ```
+   
+   This approach improves maintainability by:
+   - Reducing code duplication
+   - Making it easier to add or remove items
+   - Ensuring consistent styling and behavior
+   - Improving readability through data-driven rendering
+
+8. Constants and static data should be defined outside components:
+   - Define constants, static arrays, and configuration objects outside of component functions
+   - Place them at the file level or in dedicated constants files when used across multiple components
+   - Use uppercase snake case (UPPER_SNAKE_CASE) for primitive constants
+   - Use camelCase for complex object constants like arrays or objects containing configuration
+   
+   Example:
+   ```jsx
+   // GOOD
+   // At the top of the file, outside any component
+   const socialProviders = [
+     {
+       id: "google",
+       name: "auth.google",
+       icon: (
+         <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+           {/* SVG path details */}
+         </svg>
+       ),
+     },
+     {
+       id: "discord",
+       name: "auth.discord",
+       icon: (
+         <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+           {/* SVG path details */}
+         </svg>
+       ),
+     },
+   ];
+   
+   // In a component
+   function LoginDialog() {
+     // Component logic
+     
+     return (
+       <div>
+         {socialProviders.map((_provider) => (
+           <Button key={_provider.id}>
+             {_provider.icon}
+             {t(_provider.name)}
+           </Button>
+         ))}
+       </div>
+     );
+   }
+   
+   // BAD
+   function LoginDialog() {
+     // Defining constants inside the component
+     const socialProviders = [
+       { id: "google", name: "auth.google", icon: <GoogleIcon /> },
+       { id: "discord", name: "auth.discord", icon: <DiscordIcon /> }
+     ];
+     
+     return (
+       <div>
+         {socialProviders.map((provider) => (
+           <Button key={provider.id}>
+             {provider.icon}
+             {t(provider.name)}
+           </Button>
+         ))}
+       </div>
+     );
+   }
+   ```
+   
+   Benefits of this approach:
+   - Prevents unnecessary re-creation of static data on each render
+   - Improves performance by keeping constant data outside the render cycle
+   - Centralizes configuration data for easier maintenance
+   - Makes the component function cleaner and focused on logic and rendering
+
+9. Always use translations instead of hardcoded text:
+   - Use the `useTranslations` hook from next-intl for all user-visible text
+   - Never hardcode static text directly in components
+   - Add new translation keys to the appropriate message files first
+   - Follow the hierarchical structure in the message files for organization
+   
+   Example:
+   ```jsx
+   // GOOD
+   import { useTranslations } from "next-intl";
+   
+   function Component() {
+     const t = useTranslations();
+     
+     return (
+       <div>
+         <h1>{t("home.autoAssignment")}</h1>
+         <p>{t("home.autoAssignmentDescription")}</p>
+       </div>
+     );
+   }
+   
+   // BAD
+   function Component() {
+     return (
+       <div>
+         <h1>Auto Assignment</h1>
+         <p>Our system automatically assigns work days based on preferences and requirements.</p>
+       </div>
+     );
+   }
+   ```
+   
+10. Steps for adding new text:
+   1. First add the new text to the message files (e.g., `src/messages/en.json` and `src/messages/zh.json`)
+   2. Use appropriate namespacing based on the feature (e.g., `home.newFeature`)
+   3. Then use the translation key in your component with the `t()` function
+   4. For text with variables, use the proper format: `t("key", { variable: value })`
+   5. Keep message files synchronized when removing or modifying text:
+      When removing a component or feature, also remove unused translation keys from all message files
+
+   Benefits:
+   - Ensures internationalization support for all text
+   - Makes language changes centralized and consistent
+   - Avoids duplication of text strings
+   - Enables easier language maintenance and expansion 
+
+11. Use `import type` for Type-Only Imports
+   - When importing types, use the `import type` syntax to clearly distinguish them from regular imports.
+   - This helps in optimizing the build process and clarifies the intent of the import.
+
+   **Example:**
+
+   ```typescript
+   // GOOD
+   import type { ColumnDef } from "@tanstack/react-table";
+
+   // BAD
+   import { ColumnDef } from "@tanstack/react-table";
+   ```
+
+   **Benefits:**
+
+   - Improves code clarity by distinguishing between types and runtime imports.
+   - Helps in tree-shaking and optimizing the build process.
+   - Aligns with TypeScript best practices for type imports.
+
+12. Prefix map variable parameters with underscore:
+   - When using map functions, prefix the parameter variable with an underscore (`_`)
+   - This convention clearly identifies variables used in mapping operations
+   - Makes code more readable by distinguishing map iteration variables from other variables
+   - Use this pattern consistently across all mapping operations
+   
+   Example:
+   ```jsx
+   // GOOD
+   {socialProviders.map((_provider) => (
+     <Button
+       key={_provider.id}
+       variant="outline"
+       className="flex-1"
+       onClick={() => handleSocialLogin(_provider.id)}
+       type="button"
+     >
+       {_provider.icon}
+       {t(_provider.name)}
+     </Button>
+   ))}
+
+   // Also applies to array methods like forEach, filter, find, etc.
+   const slotInfo = timetable.slotInfos.find(
+     (_slotInfo) => _slotInfo.id === timeslot.id
+   );
+
+   // BAD
+   {socialProviders.map((provider) => (
+     <Button
+       key={provider.id}
+       variant="outline"
+       className="flex-1"
+       onClick={() => handleSocialLogin(provider.id)}
+       type="button"
+     >
+       {provider.icon}
+       {t(provider.name)}
+     </Button>
+   ))}
+   ```
+   
+   Benefits:
+   - Improves code readability by clearly identifying map iteration variables
+   - Creates a visual distinction between iteration variables and other variables
+   - Helps prevent variable naming collisions in nested contexts
+   - Establishes a consistent pattern across the codebase
+
+This rule extends to all array iteration methods including `map`, `forEach`, `filter`, `find`, and others, providing consistency throughout the codebase.
+
+
+
+13. Always use batch operations for database queries:
+   - When inserting, updating, or deleting multiple database records, always use batch operations
+   - Never perform multiple single operations in loops where a batch operation can be used
+   - Use array methods like `map` or `reduce` to prepare data for batch operations
+   - For very large datasets, consider chunking batch operations into manageable sizes (500-1000 items)
+   
+   Example:
+   ```typescript
+   // GOOD: Batch insert multiple records
+   await ctx.db.insert(roles).values(
+     input.slots.reduce(
+       (acc, _slot) => [
+         ...acc,
+         ..._slot.roles.map((_role) => ({
+           name: _role.name,
+           amount: _role.amount,
+           slotId: _slot.id,
+         })),
+       ],
+       []
+     )
+   );
+   
+   // BAD: Inserting records one by one in a loop
+   for (const slot of input.slots) {
+     for (const role of slot.roles) {
+       await ctx.db.insert(roles).values({
+         name: role.name,
+         amount: role.amount,
+         slotId: slot.id,
+       });
+     }
+   }
+   ```
+   
+   For related operations that need to be atomic, use transactions:
+   ```typescript
+   // GOOD: Using a transaction for related operations
+   await ctx.db.transaction(async (tx) => {
+     // Create the timetable
+     const [newTimetable] = await tx.insert(timetables)
+       .values({...})
+       .returning();
+       
+     // Batch insert all slots
+     await tx.insert(slots).values(allSlots);
+     
+     // Batch insert all roles
+     await tx.insert(roles).values(allRoles);
+   });
+   ```
+   
+   Benefits:
+   - Dramatically improves performance by reducing database calls
+   - Reduces network overhead between application and database
+   - Ensures atomicity of related operations when used with transactions
+   - Reduces resource consumption (database connections, memory)
+   - Improves scalability of the application 
+
+
+14. Avoid redundant null/undefined checks:
+   - Don't check for null/undefined on variables that have already been validated
+   - Eliminate unnecessary null checks that follow type guards or prior validations
+   - Use TypeScript's type system effectively to avoid redundant safety checks
+   - Trust the schema validation when working with validated inputs
+   
+   Example:
+   ```typescript
+   // BAD: Redundant check after validation
+   // Process slotInfos (insert/update/delete)
+   const existingSlotInfoIds = new Set(timetable.slotInfos.map(si => si.id));
+   const inputSlotInfoIds = new Set(input.slotInfos?.map(si => si.id).filter(Boolean));
+   
+   // Unnecessary check - input.slotInfos is already validated by the schema
+   if (input.slotInfos) {
+     for (const slotInfo of input.slotInfos) {
+       // Implementation
+     }
+   }
+   
+   // GOOD: Eliminate redundant checks
+   const existingSlotInfoIds = new Set(timetable.slotInfos.map(si => si.id));
+   const inputSlotInfoIds = new Set(input.slotInfos.map(si => si.id).filter(Boolean));
+   
+   // Directly use validated input
+   for (const slotInfo of input.slotInfos) {
+     // Implementation
+   }
+   ```
+   
+   For optional fields that might be undefined, consider these approaches:
+   ```typescript
+   // GOOD: Use nullish coalescing for optional arrays
+   const items = input.optionalItems ?? [];
+   for (const item of items) {
+     // Implementation
+   }
+   
+   // GOOD: Use optional chaining with default empty array
+   (input.optionalItems || []).forEach(_item => {
+     // Implementation
+   });
+   ```
+   
+   Benefits:
+   - Cleaner, more concise code without unnecessary conditionals
+   - Improved readability by reducing nesting levels
+   - Better performance by avoiding redundant checks
+   - Proper utilization of TypeScript's type system
+   - Relies on schema validation to ensure data integrity
+   
+15. Always use transactions for related database operations:
+   - Wrap multiple related database operations within a transaction using `ctx.db.transaction`
+   - Use transactions for any operation that modifies multiple tables or records
+   - Combine transactions with batch operations for optimal performance and data integrity
+   - Never perform related updates outside a transaction as it risks data inconsistency
+   
+   Example:
+   ```typescript
+   // GOOD: Using a transaction for multiple related operations
+   await ctx.db.transaction(async (tx) => {
+     // Create main record
+     const [newTimetable] = await tx.insert(timetables)
+       .values({
+         title: input.title,
+         createdById: ctx.session.user.id,
+       })
+       .returning();
+     
+     // Batch insert related records
+     await tx.insert(slotInfos).values(
+       input.slotInfos.map(_slotInfo => ({
+         id: _slotInfo.id,
+         name: _slotInfo.name,
+         timetableId: newTimetable.id,
+       }))
+     );
+     
+     // Other related operations...
+   });
+   
+   // BAD: Multiple dependent operations without a transaction
+   const [newTimetable] = await ctx.db.insert(timetables)
+     .values({
+       title: input.title,
+       createdById: ctx.session.user.id,
+     })
+     .returning();
+   
+   // If this fails, we have an inconsistent database state
+   await ctx.db.insert(slotInfos).values(
+     input.slotInfos.map(_slotInfo => ({
+       id: _slotInfo.id,
+       name: _slotInfo.name,
+       timetableId: newTimetable.id,
+     }))
+   );
+   ```
+   
+   Benefits:
+   - Ensures data integrity with all-or-nothing operations
+   - Maintains database consistency even when errors occur
+   - Prevents orphaned or inconsistent records
+   - Simplifies error handling and recovery
+   - Creates logical boundaries around related operations
+
+
+16. Record object naming convention:
+   - Record variable names must include the key type followed by the value type, ending with "Record"
+   - Format: `[keyName][ValueType]Record`
+   - This clearly communicates what the object contains and how it's structured
+   - Use plural forms for array values and singular forms for scalar values
+   
+   Example:
+   ```typescript
+   // GOOD: Key name + Value type + "Record" suffix
+   const roleNameRepliesRecord: Record<string, Reply[]> = {};      // keyed by role name, contains arrays of replies
+   const staffIdAssignmentCountRecord: Record<string, number> = {}; // keyed by staff ID, contains assignment counts
+   const dateKeyRoleAmountsRecord: Record<string, Record<string, number>> = {}; // nested records with clear structure
+   
+   // BAD: Does not follow the naming convention
+   const staffByRole: Record<string, Reply[]> = {};     // Missing "Record" suffix, key type not explicit
+   const assignmentCount: Record<string, number> = {};  // Too generic, doesn't indicate key type
+   const roleAssignmentCount: Record<string, Record<string, number>> = {}; // Unclear key structure
+   ```
+   
+   Benefits:
+   - Self-documenting code that clearly indicates the structure of record objects
+   - Improved readability and maintainability when working with complex data structures
+   - Consistent naming patterns make the codebase easier to navigate
+   - Helps prevent errors by making key and value types explicit in the variable name
+   - Easier to understand what the record represents at a glance without checking type definitions
+
+
+17: Proper Next.js Server Component Parameter Handling
+
+    Always follow the specific patterns required by Next.js server components, particularly when dealing with promise-based parameters.
+
+    ## Example Code
+
+    ```typescript
+    // CORRECT for Next.js server components
+    export async function generateMetadata({
+      params,
+    }: {
+      params: Promise<{ locale: string }>;
+    }) {
+      const { locale } = await params;
+      // Use locale after awaiting
+    }
+
+    // WRONG for Next.js server components
+    export async function generateMetadata({
+      params: { locale },
+    }: {
+      params: { locale: string };
+    }) {
+      // This pattern doesn't work with Promise-based params
+    }
+    ```
+
+    ## Details
+
+    Next.js server components often receive parameters as promises that must be awaited before destructuring, especially in metadata generation functions and other server component lifecycle methods.
+
+    ### Complete Example
+
+    ```typescript
+    // CORRECT implementation
+    export async function generateMetadata({
+      params,
+    }: {
+      params: Promise<{ locale: string }>;
+    }) {
+      const { locale } = await params;
+      const t = await getTranslations({ locale, namespace: "footer" });
+      return {
+        title: t("termsOfService"),
+      };
+    }
+    ```
+
+    ## Benefits
+
+    - Properly handles asynchronous parameter resolution in Next.js server components
+    - Prevents type errors when working with Promise-based parameters
+    - Follows the expected patterns for Next.js App Router
+    - Ensures server component metadata and other async functions work correctly
+    - Aligns with Next.js documentation and best practices for server components
+
+    This rule is specific to Next.js server components and may differ from patterns used in client components or other frameworks.
+
+
+18: Use Enums for Grouped Keys
+
+    When working with collections of related items accessed by string keys (such as dialog IDs, tab IDs, or feature flags), always use TypeScript enums to define the valid keys.
+
+    **Example:**
+
+    ```typescript
+    // GOOD: Using an enum for dialog IDs
+    enum DialogId {
+      LOGIN = "login",
+      SIGNUP = "signup",
+      SETTINGS = "settings",
+      CONFIRMATION = "confirmation",
+    }
+
+    type DialogStore = {
+      dialogs: Record<DialogId, DialogState>;
+      openDialog: (dialogId: DialogId) => void;
+      closeDialog: (dialogId: DialogId) => void;
+    }
+
+    // Usage
+    useDialogStore.getState().openDialog(DialogId.LOGIN);
+
+    // BAD: Using string literals
+    type DialogStore = {
+      dialogs: {
+        login: DialogState;
+        signup: DialogState;
+        settings: DialogState;
+      };
+      openDialog: (dialogId: string) => void;
+      closeDialog: (dialogId: string) => void;
+    }
+
+    // Usage with potential for errors
+    useDialogStore.getState().openDialog("login"); // No type checking for valid IDs
+    useDialogStore.getState().openDialog("logn"); // Typo not caught by TypeScript
+    ```
+
+    **Benefits:**
+
+    1. **Type Safety**: Ensures only predefined valid keys are used throughout the codebase
+    2. **Autocompletion**: IDE provides suggestions for valid enum values
+    3. **Refactoring Support**: Changing a key name in the enum updates all references
+    4. **Self-Documentation**: Enum clearly defines all available options in one place
+    5. **Error Prevention**: Prevents typos and invalid key usage at compile time
+    6. **Centralized Definition**: Single source of truth for all valid keys
+
+    **Implementation Details:**
+
+    - Use string values in enums (e.g., `LOGIN = "login"`) rather than default numeric values
+    - Export the enum for reuse across multiple files when needed
+    - Use `Record<EnumType, ValueType>` for type-safe mappings
+    - Place the enum definition close to where it's used, typically at the top of the relevant store or component file
+    - Follow the same naming conventions as other constants: PascalCase for the enum name, UPPER_SNAKE_CASE for enum members if they represent constants
+
+    This approach aligns with our existing practices for type safety, code organization, and maintainability.
+
+  
+19. Never code without understanding the problem and solution:
+   - Before implementing any code, ensure you fully understand both the problem and the solution
+   - Take time to analyze requirements and consider edge cases before writing code
+   - Ask clarifying questions when requirements are unclear rather than making assumptions
+   - Only proceed with implementation when you have a clear mental model of what you're building
+   - Wait for explicit instruction to code if you're unsure about the approach
+   
+   Example workflow:
+   ```
+   // GOOD
+   1. Receive feature request
+   2. Analyze requirements and identify potential issues
+   3. Ask clarifying questions if needed
+   4. Formulate a clear solution approach
+   5. Confirm understanding before implementation
+   6. Implement the solution
+   
+   // BAD
+   1. Receive feature request
+   2. Immediately start coding based on initial assumptions
+   3. Encounter problems due to misunderstanding requirements
+   4. Need to refactor or rewrite code completely
+   ```
+   
+   Benefits:
+   - Reduces wasted time from implementing incorrect solutions
+   - Prevents bugs caused by misunderstood requirements
+   - Leads to cleaner, more maintainable code
+   - Improves overall code quality and developer efficiency
+   - Creates a better collaborative environment by promoting clear communication 
+

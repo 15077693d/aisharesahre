@@ -1,0 +1,66 @@
+{
+  "common": {
+    "appName": "launch-kit",
+    "signInRequired": "Sign in required to continue",
+    "loading": "Loading"
+  },
+  "banner": {
+    "testVersion": "Test version",
+    "contactEmail": "Contact us at {email}"
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy",
+    "contactUs": "Contact Us",
+    "copyright": "© {year} launch-kit. All rights reserved."
+  },
+  "loading": "Loading",
+  "navigation": {
+    "home": "Home",
+    "userAvatar": "User avatar",
+    "signOut": "Sign out",
+    "signIn": "Sign in"
+  },
+  "home": {
+    "heroDescription": "heroDescription",
+    "cardTitle1": "cardTitle1",
+    "cardDescription1": "cardDescription1",
+    "cardTitle2": "cardTitle2",
+    "cardDescription2": "cardDescription2",
+    "cardTitle3": "cardTitle3",
+    "cardDescription3": "cardDescription3",
+    "howItWorks": "howItWorks",
+    "button": "button",
+    "readyToStart": "readyToStart",
+    "ctaDescription": "ctaDescription"
+  },
+  "error": {
+    "title": "Something went wrong!",
+    "description": "We apologize for the inconvenience. Please try again or return to the home page.",
+    "tryAgain": "Try again",
+    "returnHome": "Return Home"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "Could not find requested resource",
+    "redirecting": "Redirecting to home page in {count} seconds...",
+    "returnHome": "Return Home Now"
+  },
+  "auth": {
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "email": "Email",
+    "password": "Password",
+    "emailPlaceholder": "example@example.com",
+    "passwordPlaceholder": "••••••••",
+    "enterCredentials": "Enter your credentials to sign in to your account",
+    "signingIn": "Signing in...",
+    "signInSuccess": "Signed in successfully",
+    "signInError": "Failed to sign in",
+    "invalidCredentials": "Invalid email or password",
+    "orContinueWith": "or continue with",
+    "google": "Google",
+    "discord": "Discord"
+  }
+}
