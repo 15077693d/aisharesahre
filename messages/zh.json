@@ -4,7 +4,7 @@
     "termsOfService": "服務條款",
     "cookiePolicy": "Cookie 政策",
     "contactUs": "聯絡我們",
-    "copyright": "© {year} launch-kit. All rights reserved."
+    "copyright": "© {year} aishareshare. All rights reserved."
   },
   "banner": {
     "testVersion": "測試版本",
@@ -12,7 +12,7 @@
   },
   "common": {
     "signInRequired": "需要登錄才能繼續",
-    "appName": "launch-kit",
+    "appName": "aishareshare",
     "loading": "處理中"
   },
   "navigation": {

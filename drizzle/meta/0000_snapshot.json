@@ -4,8 +4,8 @@
   "version": "7",
   "dialect": "postgresql",
   "tables": {
-    "public.launch-kit_account": {
-      "name": "launch-kit_account",
+    "public.aishareshare_account": {
+      "name": "aishareshare_account",
       "schema": "",
       "columns": {
         "userId": {
@@ -93,27 +93,20 @@
         }
       },
       "foreignKeys": {
-        "launch-kit_account_userId_launch-kit_user_id_fk": {
-          "name": "launch-kit_account_userId_launch-kit_user_id_fk",
-          "tableFrom": "launch-kit_account",
-          "tableTo": "launch-kit_user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+        "aishareshare_account_userId_aishareshare_user_id_fk": {
+          "name": "aishareshare_account_userId_aishareshare_user_id_fk",
+          "tableFrom": "aishareshare_account",
+          "tableTo": "aishareshare_user",
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
-        "launch-kit_account_provider_providerAccountId_pk": {
-          "name": "launch-kit_account_provider_providerAccountId_pk",
-          "columns": [
-            "provider",
-            "providerAccountId"
-          ]
+        "aishareshare_account_provider_providerAccountId_pk": {
+          "name": "aishareshare_account_provider_providerAccountId_pk",
+          "columns": ["provider", "providerAccountId"]
         }
       },
       "uniqueConstraints": {},
@@ -121,8 +114,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.launch-kit_session": {
-      "name": "launch-kit_session",
+    "public.aishareshare_session": {
+      "name": "aishareshare_session",
       "schema": "",
       "columns": {
         "sessionToken": {
@@ -162,16 +155,12 @@
         }
       },
       "foreignKeys": {
-        "launch-kit_session_userId_launch-kit_user_id_fk": {
-          "name": "launch-kit_session_userId_launch-kit_user_id_fk",
-          "tableFrom": "launch-kit_session",
-          "tableTo": "launch-kit_user",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+        "aishareshare_session_userId_aishareshare_user_id_fk": {
+          "name": "aishareshare_session_userId_aishareshare_user_id_fk",
+          "tableFrom": "aishareshare_session",
+          "tableTo": "aishareshare_user",
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -182,8 +171,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.launch-kit_user": {
-      "name": "launch-kit_user",
+    "public.aishareshare_user": {
+      "name": "aishareshare_user",
       "schema": "",
       "columns": {
         "id": {
@@ -232,8 +221,8 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
-    "public.launch-kit_verification_token": {
-      "name": "launch-kit_verification_token",
+    "public.aishareshare_verification_token": {
+      "name": "aishareshare_verification_token",
       "schema": "",
       "columns": {
         "identifier": {
@@ -258,12 +247,9 @@
       "indexes": {},
       "foreignKeys": {},
       "compositePrimaryKeys": {
-        "launch-kit_verification_token_identifier_token_pk": {
-          "name": "launch-kit_verification_token_identifier_token_pk",
-          "columns": [
-            "identifier",
-            "token"
-          ]
+        "aishareshare_verification_token_identifier_token_pk": {
+          "name": "aishareshare_verification_token_identifier_token_pk",
+          "columns": ["identifier", "token"]
         }
       },
       "uniqueConstraints": {},

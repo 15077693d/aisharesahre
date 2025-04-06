@@ -1,6 +1,6 @@
 {
   "common": {
-    "appName": "launch-kit",
+    "appName": "aishareshare",
     "signInRequired": "Sign in required to continue",
     "loading": "Loading"
   },
@@ -13,7 +13,7 @@
     "termsOfService": "Terms of Service",
     "cookiePolicy": "Cookie Policy",
     "contactUs": "Contact Us",
-    "copyright": "© {year} launch-kit. All rights reserved."
+    "copyright": "© {year} aishareshare. All rights reserved."
   },
   "loading": "Loading",
   "navigation": {

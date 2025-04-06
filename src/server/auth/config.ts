@@ -117,7 +117,7 @@ export const authConfig = {
               httpOnly: true,
               sameSite: "lax",
               path: "/",
-              domain: ".launch-kit.com",
+              domain: ".aishareshare.com",
               secure: true,
             },
           },

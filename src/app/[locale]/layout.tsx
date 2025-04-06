@@ -22,16 +22,16 @@ export async function generateMetadata({
 
   if (locale === "zh") {
     return {
-      title: "launch-kit",
-      description: "launch-kit",
+      title: "aishareshare",
+      description: "aishareshare",
       icons: [{ rel: "icon", url: "/favicon.ico" }],
     };
   }
 
   // 默認英文
   return {
-    title: "launch-kit",
-    description: "launch-kit",
+    title: "aishareshare",
+    description: "aishareshare",
     icons: [{ rel: "icon", url: "/favicon.ico" }],
   };
 }

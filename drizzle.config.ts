@@ -8,5 +8,5 @@ export default {
   dbCredentials: {
     url: env.DATABASE_URL,
   },
-  tablesFilter: ["launch-kit_*"],
+  tablesFilter: ["aishareshare_*"],
 } satisfies Config;

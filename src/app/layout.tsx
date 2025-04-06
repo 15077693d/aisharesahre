@@ -7,8 +7,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "launch-kit",
-  description: "launch-kit",
+  title: "aishareshare",
+  description: "aishareshare",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 export default function RootLayout({
