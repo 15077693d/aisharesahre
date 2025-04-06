@@ -2,6 +2,7 @@
 import { Link } from "@/i18n/navigation";
 import { DialogId, useDialogStore } from "@/lib/stores/useDialogStore";
 import { Github, Plus, Share2 } from "lucide-react";
+import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { SharePromptDialog } from "../dialog/share-prompt-dialog";
 import { AvatarDropdown } from "../dropdown/avatar-dropdown";
@@ -11,6 +12,8 @@ import { Button } from "../ui/button";
 export function Navbar() {
   const t = useTranslations();
   const { openDialog, dialogs, onOpenChange } = useDialogStore();
+  const { data: session, status } = useSession();
+  const isAuthenticated = status === "authenticated";
   return (
     <>
       <header className="bg-white shadow-sm">
@@ -23,34 +26,24 @@ export function Navbar() {
               </h1>
             </Link>
 
-            <div className="flex items-center gap-4">
-              <nav className="hidden md:flex space-x-4 mr-4">
-                <Link
-                  href="/"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  {t("navigation.home")}
-                </Link>
-                <Link
-                  href="/prompts"
-                  className="text-gray-600 hover:text-gray-900 transition-colors"
-                >
-                  {t("prompt.browseAll")}
-                </Link>
-              </nav>
-              <div className="flex items-center gap-2">
-                <LanguageDropdown />
-                <AvatarDropdown />
-                <Button
-                  variant="default"
-                  onClick={() => openDialog(DialogId.SHARE_PROMPT)}
-                >
-                  <Plus className="h-5 w-5 mr-2" />
-                  <span className="hidden sm:block">
-                    {t("navigation.sharePrompt")}
-                  </span>
-                </Button>
-              </div>
+            <div className="flex items-center gap-2">
+              <LanguageDropdown />
+              <AvatarDropdown />
+              <Button
+                variant="default"
+                onClick={() => {
+                  if (!isAuthenticated) {
+                    openDialog(DialogId.LOGIN);
+                  } else {
+                    openDialog(DialogId.SHARE_PROMPT);
+                  }
+                }}
+              >
+                <Plus className="h-5 w-5 mr-2" />
+                <span className="hidden sm:block">
+                  {t("navigation.sharePrompt")}
+                </span>
+              </Button>
             </div>
           </div>
         </div>

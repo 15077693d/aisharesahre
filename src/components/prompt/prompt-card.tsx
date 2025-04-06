@@ -19,6 +19,7 @@ interface PromptCardProps {
     id: string;
     title: string;
     aiTool: string;
+    description: string;
     content: string;
     userId: string;
     createdAt: Date | null;
@@ -67,6 +68,7 @@ export function PromptCard({ prompt }: PromptCardProps) {
       </CardHeader>
       <CardContent className="flex-grow">
         <div className="prose max-w-none dark:prose-invert">
+          <p className="text-sm text-gray-500 mb-2">{prompt.description}</p>
           <p className="text-sm text-gray-700 dark:text-gray-300 line-clamp-4">
             {prompt.content}
           </p>

@@ -13,6 +13,7 @@ import { and, eq } from "drizzle-orm";
 const promptSchema = z.object({
   title: z.string().min(1, "Title is required").max(255),
   aiTool: z.string().min(1, "AI tool is required").max(255),
+  description: z.string().min(1, "Description is required").max(255),
   content: z.string().min(1, "Prompt content is required"),
 });
 
@@ -33,6 +34,7 @@ export const promptRouter = createTRPCRouter({
         .values({
           title: input.title,
           aiTool: input.aiTool,
+          description: input.description,
           content: input.content,
           userId,
         })
@@ -110,6 +112,7 @@ export const promptRouter = createTRPCRouter({
         .set({
           title: input.title,
           aiTool: input.aiTool,
+          description: input.description,
           content: input.content,
           updatedAt: new Date(),
         })

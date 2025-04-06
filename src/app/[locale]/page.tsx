@@ -5,7 +5,6 @@ import {
   Search,
   Share2,
   PenTool as Tool,
-  X,
 } from "lucide-react";
 import React, { useState } from "react";
 
@@ -93,7 +92,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+    <div className="bg-gradient-to-br from-purple-50 to-blue-50">
       {/* Header */}
 
       {/* Copy Success Toast */}
@@ -149,133 +148,6 @@ function App() {
                 </button>
               </div>
             </div>
-          </div>
-        </div>
-      )}
-
-      {/* Share Prompt Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg w-full max-w-2xl">
-            <div className="flex justify-between items-center p-6 border-b">
-              <h2 className="text-2xl font-semibold text-gray-900">
-                Share Your Prompt
-              </h2>
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="text-gray-400 hover:text-gray-500"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
-            <form onSubmit={handleSubmit} className="p-6 space-y-4">
-              <div>
-                <label
-                  htmlFor="title"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Title
-                </label>
-                <input
-                  type="text"
-                  id="title"
-                  value={newPrompt.title}
-                  onChange={(e) =>
-                    setNewPrompt({ ...newPrompt, title: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="tool"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  AI Tool
-                </label>
-                <input
-                  type="text"
-                  id="tool"
-                  value={newPrompt.tool}
-                  onChange={(e) =>
-                    setNewPrompt({ ...newPrompt, tool: e.target.value })
-                  }
-                  placeholder="Enter AI tool name (e.g., ChatGPT, Midjourney, DALL-E)"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="description"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Description
-                </label>
-                <input
-                  type="text"
-                  id="description"
-                  value={newPrompt.description}
-                  onChange={(e) =>
-                    setNewPrompt({ ...newPrompt, description: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="prompt"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Prompt
-                </label>
-                <textarea
-                  id="prompt"
-                  value={newPrompt.prompt}
-                  onChange={(e) =>
-                    setNewPrompt({ ...newPrompt, prompt: e.target.value })
-                  }
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-              </div>
-              <div>
-                <label
-                  htmlFor="author"
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  Your Name
-                </label>
-                <input
-                  type="text"
-                  id="author"
-                  value={newPrompt.author}
-                  onChange={(e) =>
-                    setNewPrompt({ ...newPrompt, author: e.target.value })
-                  }
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  required
-                />
-              </div>
-              <div className="flex justify-end space-x-3 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="px-4 py-2 text-gray-700 hover:text-gray-900"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
-                >
-                  Share Prompt
-                </button>
-              </div>
-            </form>
           </div>
         </div>
       )}

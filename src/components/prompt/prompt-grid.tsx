@@ -8,6 +8,7 @@ interface PromptGridProps {
     id: string;
     title: string;
     aiTool: string;
+    description: string;
     content: string;
     userId: string;
     createdAt: Date | null;

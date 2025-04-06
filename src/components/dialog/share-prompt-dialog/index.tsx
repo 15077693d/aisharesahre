@@ -24,11 +24,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import { LoginDialog } from "../login-dialog";
 
 interface SharePromptDialogProps {
   open: boolean;
@@ -41,21 +39,8 @@ export function SharePromptDialog({
 }: SharePromptDialogProps) {
   const t = useTranslations();
   const router = useRouter();
-  const { data: session, status } = useSession();
+  const { status } = useSession();
   const isAuthenticated = status === "authenticated";
-
-  // Show login dialog if user is not authenticated
-  const [showLoginDialog, setShowLoginDialog] = useState(
-    !isAuthenticated && open,
-  );
-
-  useEffect(() => {
-    if (open && !isAuthenticated) {
-      setShowLoginDialog(true);
-    } else {
-      setShowLoginDialog(false);
-    }
-  }, [open, isAuthenticated]);
 
   // Define schema for prompt validation
   const promptSchema = z.object({
@@ -65,6 +50,9 @@ export function SharePromptDialog({
     aiTool: z
       .string()
       .min(1, t("prompt.aiTool") + " " + t("auth.invalidCredentials")),
+    description: z
+      .string()
+      .min(1, t("prompt.description") + " " + t("auth.invalidCredentials")),
     content: z
       .string()
       .min(1, t("prompt.content") + " " + t("auth.invalidCredentials")),
@@ -77,6 +65,7 @@ export function SharePromptDialog({
     defaultValues: {
       title: "",
       aiTool: "",
+      description: "",
       content: "",
     },
   });
@@ -97,14 +86,10 @@ export function SharePromptDialog({
   });
 
   async function onSubmit(data: PromptFormValues) {
-    if (!isAuthenticated) {
-      setShowLoginDialog(true);
-      return;
-    }
-
     await createPrompt.mutateAsync({
       title: data.title,
       aiTool: data.aiTool,
+      description: data.description,
       content: data.content,
     });
   }
@@ -112,23 +97,9 @@ export function SharePromptDialog({
   const { formState } = form;
   const { isSubmitting } = formState;
 
-  // Handle login success
-  const handleLoginSuccess = async () => {
-    setShowLoginDialog(false);
-    return Promise.resolve();
-  };
-
-  // Prevent dialog from closing when login dialog is shown
-  const handleOpenChange = (newOpen: boolean) => {
-    if (showLoginDialog && !newOpen) {
-      setShowLoginDialog(false);
-    }
-    onOpenChange(newOpen);
-  };
-
   return (
     <>
-      <Dialog open={open} onOpenChange={handleOpenChange}>
+      <Dialog open={open} onOpenChange={onOpenChange}>
         <DialogContent className="sm:max-w-2xl">
           <DialogHeader>
             <DialogTitle>{t("prompt.sharePrompt")}</DialogTitle>
@@ -162,6 +133,23 @@ export function SharePromptDialog({
                     <FormControl>
                       <Input
                         placeholder={t("prompt.aiToolPlaceholder")}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("prompt.description")}</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        placeholder={t("prompt.descriptionPlaceholder")}
+                        className="min-h-[120px]"
                         {...field}
                       />
                     </FormControl>
@@ -207,13 +195,6 @@ export function SharePromptDialog({
           </Form>
         </DialogContent>
       </Dialog>
-
-      {/* Login dialog if user is not authenticated */}
-      <LoginDialog
-        open={showLoginDialog}
-        onOpenChange={setShowLoginDialog}
-        onSubmitSuccess={handleLoginSuccess}
-      />
     </>
   );
 }

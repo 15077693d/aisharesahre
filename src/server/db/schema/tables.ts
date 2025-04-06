@@ -79,6 +79,7 @@ export const prompts = createTable(
       .$defaultFn(() => crypto.randomUUID()),
     title: d.varchar({ length: 255 }).notNull(),
     aiTool: d.varchar({ length: 255 }).notNull(),
+    description: d.text().notNull(),
     content: d.text().notNull(),
     userId: d
       .varchar({ length: 255 })
